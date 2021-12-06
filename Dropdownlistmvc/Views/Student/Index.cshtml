@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Dropdownlistmvc.Data.Student>
+
+@{
+    ViewBag.Title = "Students";
+}
+
+<h2>Employees</h2>
+
+<p>
+    @Html.ActionLink(" New", "AddStudent", null, new { @class = "btn btn-primary glyphicon glyphicon-plus" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Roll_NO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartmentId)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Roll_NO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departments.DepartmentName)
+            </td>
+
+
+            <td>
+                @Html.ActionLink(" ", "Delete", new { Id = item.Id }, new { @class = "btn btn-danger glyphicon glyphicon-remove" }) |
+                @Html.ActionLink(" Edit", "Edit", new { Id = item.Id }, new { @class = "btn btn-primary glyphicon glyphicon-ok" })
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    <script>
+
+
+        $(document).ready(function () {
+            if ('@TempData["message"]' == "Deleted") {
+               $.notify("Warning: your record has been deleted successfully", "warn");
+            }
+            if ('@TempData["message"]' == "Save"){
+                $.notify("your record has been Saved successfully", "success");
+
+            }
+        });
+
+
+    </script>
+}
